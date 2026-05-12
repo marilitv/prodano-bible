@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prodano Bible — На волне ИИ 2026</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f4f0;color:#1a1a1a;padding:1.5rem}
+.wrap{max-width:720px;margin:0 auto}
+.header{margin-bottom:1.5rem}
+.header-label{font-size:11px;color:#888;letter-spacing:.05em;margin-bottom:4px;text-transform:uppercase}
+.header-title{font-size:22px;font-weight:500;color:#1a1a1a;margin-bottom:3px}
+.header-sub{font-size:13px;color:#666}
+.nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid #e0ddd6}
+.nav button{font-size:12px;padding:5px 14px;border:1px solid #ccc;border-radius:20px;background:#fff;color:#666;cursor:pointer;transition:all .15s}
+.nav button:hover{background:#f0ede8}
+.nav button.on{border-color:#999;color:#1a1a1a;font-weight:500;background:#fff}
+.sec{display:none}.sec.on{display:block}
+.stitle{font-size:16px;font-weight:500;color:#1a1a1a;margin-bottom:1rem}
+.card{background:#fff;border:1px solid #e0ddd6;border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px}
+.ctitle{font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:6px}
+.cbody{font-size:13px;color:#555;line-height:1.65}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.met{background:#f5f4f0;border-radius:8px;padding:.75rem 1rem}
+.mnum{font-size:20px;font-weight:500;color:#1a1a1a;margin-bottom:2px}
+.mlbl{font-size:12px;color:#888}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;margin-right:3px;margin-bottom:3px}
+.t-teal{background:#E1F5EE;color:#085041}
+.t-blue{background:#E6F1FB;color:#0C447C}
+.t-amber{background:#FAEEDA;color:#633806}
+.t-red{background:#FCEBEB;color:#791F1F}
+.t-purple{background:#EEEDFE;color:#3C3489}
+.t-coral{background:#FAECE7;color:#712B13}
+.tip{background:#E1F5EE;border-radius:8px;padding:.65rem 1rem;font-size:12px;color:#085041;margin-bottom:10px}
+.warn{background:#FAEEDA;border-radius:8px;padding:.65rem 1rem;font-size:12px;color:#633806;margin-bottom:10px}
+.sep{height:1px;background:#e0ddd6;margin:1.25rem 0}
+.step{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start}
+.snum{min-width:22px;height:22px;border-radius:50%;background:#f5f4f0;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:#666;flex-shrink:0;margin-top:1px}
+.stxt{font-size:13px;color:#555;line-height:1.6}
+.stxt b{color:#1a1a1a;font-weight:500}
+.fbr{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.fbtn{font-size:11px;padding:3px 10px;border:1px solid #ccc;border-radius:10px;background:#fff;color:#666;cursor:pointer}
+.fbtn.on{background:#f0ede8;border-color:#999;color:#1a1a1a;font-weight:500}
+.oi{border:1px solid #e0ddd6;border-radius:8px;padding:.75rem 1rem;margin-bottom:7px;cursor:pointer;transition:background .1s}
+.oi:hover{background:#f5f4f0}
+.oq{font-size:13px;font-weight:500;color:#1a1a1a}
+.od{display:none;margin-top:9px;padding-top:9px;border-top:1px solid #e0ddd6}
+.od.on{display:block}
+.orl{font-size:11px;letter-spacing:.04em;color:#aaa;margin-bottom:2px;text-transform:uppercase}
+.ort{font-size:13px;color:#555;line-height:1.55;margin-bottom:7px}
+.bad{color:#A32D2D}
+.good{color:#0F6E56}
+.qi{border:1px solid #e0ddd6;border-radius:8px;padding:.75rem 1rem;margin-bottom:7px;cursor:pointer}
+.qq{font-size:13px;font-weight:500;color:#1a1a1a}
+.qa{display:none;margin-top:7px;font-size:13px;color:#555;line-height:1.6;padding-top:7px;border-top:1px solid #e0ddd6}
+.qa.on{display:block}
+.stab{cursor:pointer;padding:5px 12px;font-size:12px;border:1px solid #e0ddd6;border-radius:10px;background:#fff;color:#666;margin-right:5px;margin-bottom:5px;display:inline-block}
+.stab.on{background:#f0ede8;font-weight:500;color:#1a1a1a;border-color:#999}
+.sc{display:none}.sc.on{display:block}
+.stage{border:1px solid #e0ddd6;border-radius:12px;margin-bottom:10px;overflow:hidden}
+.sh{display:flex;align-items:center;gap:10px;padding:.75rem 1rem;cursor:pointer;background:#fff;transition:background .1s}
+.sh:hover{background:#f5f4f0}
+.sn{min-width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
+.n1{background:#E6F1FB;color:#0C447C}.n2{background:#E1F5EE;color:#085041}.n3{background:#EEEDFE;color:#3C3489}.n4{background:#FAEEDA;color:#633806}.n5{background:#FAECE7;color:#712B13}.n6{background:#EAF3DE;color:#27500A}.n7{background:#E1F5EE;color:#085041}.n8{background:#E6F1FB;color:#0C447C}
+.si{flex:1}
+.st{font-size:13px;font-weight:500;color:#1a1a1a}
+.ss{font-size:11px;color:#aaa;margin-top:1px}
+.sb{display:none;padding:.875rem 1rem;border-top:1px solid #e0ddd6}
+.sb.on{display:block}
+.ml{font-size:11px;letter-spacing:.04em;color:#aaa;margin-bottom:4px;text-transform:uppercase}
+.msg{background:#f5f4f0;border-radius:8px;padding:.75rem 1rem;font-size:13px;color:#555;line-height:1.65;margin-bottom:8px}
+.msg b{color:#1a1a1a;font-weight:500}
+.fu{background:#FAEEDA;border-radius:8px;padding:.6rem .875rem;font-size:12px;color:#633806;margin-top:5px;margin-bottom:8px}
+.br{border-left:2px solid #ddd;padding-left:10px;margin:7px 0 10px}
+.brt{font-size:11px;font-weight:500;color:#888;margin-bottom:4px}
+.bri{font-size:12px;color:#555;margin-bottom:3px;line-height:1.5}
+.bri b{font-weight:500;color:#1a1a1a}
+.sc3{display:flex;gap:6px;margin:7px 0}
+.sc3d{flex:1;border-radius:8px;padding:6px 8px;font-size:11px;text-align:center;line-height:1.4}
+.hot{background:#E1F5EE;color:#085041}.warm{background:#FAEEDA;color:#633806}.cold{background:#FCEBEB;color:#791F1F}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="header">
+  <div class="header-label">Prodano Bible · лагерь Майи Драган</div>
+  <div class="header-title">На волне ИИ — 2026</div>
+  <div class="header-sub">Разбор продукта</div>
+</div>
+
+<div class="nav">
+  <button class="on" onclick="showSec('script',this)">Скрипт</button>
+  <button onclick="showSec('product',this)">Продукт</button>
+    <button onclick="showSec('earnings',this)">Способы заработка</button>
+  <button onclick="showSec('audience',this)">Аудитория</button>
+  <button onclick="showSec('obj',this)">Возражения</button>
+  <button onclick="showSec('faq',this)">Q&A</button>
+</div>
+
+<!-- СКРИПТ -->
+<div id="sec-script" class="sec on">
+<div class="stitle">Скрипт — 8 этапов</div>
+<div class="tip">Один вопрос за раз. Не давать сразу список. Не переходить к презентации до этапа 8. Цель каждого шага — выслушать, а не рассказать.</div>
+<div class="warn">Начинаем общение на «Вы», потом можно перейти на ты.</div>
+
+<div class="stage">
+<div class="sh" onclick="tog(this)">
+  <div class="sn n1">1</div><div class="si"><div class="st">Первое сообщение</div><div class="ss">Установить контакт</div></div>
+  <i class="ti ti-chevron-down" style="font-size:15px;color:#aaa"></i>
+</div>
+<div class="sb">
+  <div class="ml">Основное сообщение</div>
+  <div class="msg">Добрый день, <b>«имя»</b> ☺️<br>Рад(а) знакомству — это Мария из команды Майи Драган.<br>Вы оставили анкету предзаписи в наш «лагерь» — всё верно?)</div>
+  <div class="fu"><b>Нет ответа 24 часа — follow-up:</b><br>«Имя», добрый день! Очень ждём Ваш ответ 🙌 Вы заполняли анкету на «лагерь» к Майе — хотела уточнить пару моментов, чтобы понять, как Вам будет полезна программа. Удобно пообщаться?</div>
+  <div class="warn" style="margin-bottom:0">На этом этапе — только приветствие и уточнение факта анкеты. Никаких цен, описаний и ссылок.</div>
+</div>
+</div>
+
+<div class="stage">
+<div class="sh" onclick="tog(this)">
+  <div class="sn n2">2</div><div class="si"><div class="st">Программирование диалога</div><div class="ss">Получить согласие на формат</div></div>
+  <i class="ti ti-chevron-down" style="font-size:15px;color:#aaa"></i>
+</div>
+<div class="sb">
+  <div class="ml">Сообщение</div>
+  <div class="msg">Отлично! Предлагаю так: задам несколько вопросов, чтобы понять Вашу ситуацию и цели — и тогда смогу сказать конкретно, насколько Вам подойдёт лагерь и какой формат будет наиболее полезен. Договорились?</div>
+  <div class="fu"><b>Если сразу спрашивает про программу или цены:</b><br>«Расскажу всё — и про программу, и про стоимость 🙂 Просто хочу сначала разобраться в Вашей ситуации, чтобы говорить предметно, а не в общем. Хорошо?»</div>
+</div>
+</div>
+
+<div class="stage">
+<div class="sh" onclick="tog(this)">
+  <div class="sn n3">3</div><div class="si"><div class="st">Квалификация</div><div class="ss">Уровень, теплота, отправная точка</div></div>
+  <i class="ti ti-chevron-down" style="font-size:15px;color:#aaa"></i>
+</div>
+<div class="sb">
+  <div class="tip" style="margin-bottom:10px">Каждый вопрос — отдельным сообщением. После ответа реагируйте, затем следующий вопрос.</div>
+  <div class="ml">Вопрос 1 — знакомство с Майей</div>
+  <div class="msg">Расскажите — как давно следите за Майей и откуда о ней узнали?</div>
+  <div class="ml" style="margin-top:8px">Вопрос 2 — опыт с нейросетями</div>
+  <div class="msg">С нейросетями уже знакомы? Пробовали что-то — ChatGPT, Claude?</div>
+  <div class="ml" style="margin-top:8px">Вопрос 3 — что зацепило</div>
+  <div class="msg">Что привлекло в анкете? Почему решили её заполнить именно сейчас?</div>
+  <div class="ml" style="margin-top:8px">Вопрос 4 — шкала готовности</div>
+  <div class="msg">Отлично! Подскажите, а по шкале от 1 до 10 — насколько сейчас готовы разбираться с ИИ? Где 10 — точно хочу, а 1 — пока просто смотрю.</div>
+  <div class="sc3">
+    <div class="sc3d hot"><b>7–10</b><br>Тёплый. Можно двигаться быстрее</div>
+    <div class="sc3d warm"><b>4–6</b><br>Проработать точку А и Б, выяснить что мешает</div>
+    <div class="sc3d cold"><b>1–3</b><br>Спросить: «Что останавливает?» — до того как идти дальше</div>
+  </div>
+</div>
+</div>
+
+<div class="stage">
+<div class="sh" onclick="tog(this)">
+  <div class="sn n4">4</div><div class="si"><div class="st">Точка А — текущая ситуация</div><div class="ss">Боль, доход, контекст</div></div>
+  <i class="ti ti-chevron-down" style="font-size:15px;color:#aaa"></i>
+</div>
+<div class="sb">
+  <div class="ml">Открывающий вопрос</div>
+  <div class="msg">Спасибо за ответы! Расскажите немного о себе — чем сейчас занимаетесь?</div>
+  <div class="br">
+    <div class="brt">Уточняющий вопрос — по ситуации:</div>
+    <div class="bri"><b>Есть бизнес →</b> «А сколько уже ведёте его?»</div>
+    <div class="bri"><b>Работа по найму →</b> «Нравится то, чем занимаетесь, или хочется что-то поменять?»</div>
+    <div class="bri"><b>Фриланс или онлайн →</b> «А откуда сейчас приходят клиенты?»</div>
+    <div class="bri"><b>Декрет или пауза →</b> «А до этого чем занимались? Есть навыки, на которые хочется опереться?»</div>
+  </div>
+  <div class="ml">Про доход</div>
+  <div class="msg">И по доходу — примерно в каком диапазоне сейчас? Как думаете, нейросети могли бы помочь вырасти?</div>
+  <div class="br">
+    <div class="brt">Можно уточнить:</div>
+    <div class="bri">«Это стабильная цифра или бывают перепады?»</div>
+    <div class="bri">«Вас это устраивает или хочется больше?»</div>
+  </div>
+  <div class="ml">Что хочется изменить</div>
+  <div class="msg">Что сейчас больше всего хочется поменять в своей ситуации?</div>
+  <div class="ml">Якорный вопрос</div>
+  <div class="msg">И такой вопрос: если через полгода всё останется как сейчас — что почувствуете?</div>
+  <div class="tip" style="margin-bottom:0">Ответ на этот вопрос — главный якорь. Используйте его в резюмировании и при работе с возражениями.</div>
+</div>
+</div>
+
+<div class="stage">
+<div class="sh" onclick="tog(this)">
+  <div class="sn n5">5</div><div class="si"><div class="st">Точка Б — куда хочет прийти</div><div class="ss">Цели, желания, эмоциональный якорь</div></div>
+  <i class="ti ti-chevron-down" style="font-size:15px;color:#aaa"></i>
+</div>
+<div class="sb">
+  <div class="ml">Переход</div>
+  <div class="msg">Окей, понял(а) Вас! Теперь про приятное — куда хотите прийти 🙂</div>
+  <div class="ml">Цели на ближайшее время</div>
+  <div class="msg">К каким изменениям хотите прийти через 2–3 месяца с помощью ИИ?</div>
+  <div class="ml">Глубинный смысл</div>
+  <div class="msg">А что для Вас изменится в жизни, если придёте к этому?</div>
+  <div class="ml">Наличие плана</div>
+  <div class="msg">Есть уже понимание, как к этому прийти? Или пока нет чёткого пути?</div>
+  <div class="ml">Визуализация результата</div>
+  <div class="msg">Представьте — Вы уже там. Как себя ощущаете?</div>
+  <div class="ml">Опыт с обучением</div>
+  <div class="msg">У Вас серьёзные цели, это чувствуется. И последнее: что-то уже пробовали по теме ИИ — курсы, уроки, самостоятельно разбирались?</div>
+  <div class="fu"><b>Если говорит «проходил(а) курсы — не зашло»:</b><br>«Расскажите, что именно не пошло? Хочу убедиться, что Вы не окажетесь в той же ситуации.» → главный страх по кастдевам, переходите к разделу «Возражения».</div>
+</div>
+</div>
+
+<div class="stage">
+<div class="sh" onclick="tog(this)">
+  <div class="sn n6">6</div><div class="si"><div class="st">Определение смены</div><div class="ss">Смена 1, смена 2 или полный лагерь</div></div>
+  <i class="ti ti-chevron-down" style="font-size:15px;color:#aaa"></i>
+</div>
+<div class="sb">
+  <div class="ml">Вопрос-развилка</div>
+  <div class="msg">Уточните один момент — что сейчас актуальнее: усилить бизнес или бренд через ИИ (маркетинг, контент, продажи) — или скорее автоматизировать рутину и создать собственного ИИ-помощника?</div>
+  <div class="br">
+    <div class="brt">Логика выбора:</div>
+    <div class="bri"><b>Контент, бренд, маркетплейсы, SMM →</b> смена 1 «Бренд и клиенты»</div>
+    <div class="bri"><b>Автоматизация, рутина, помощник →</b> смена 2 «Помощник и сервис»</div>
+    <div class="bri"><b>И то и другое, «хочу всё» →</b> полный лагерь, экономия 20 000 ₽</div>
+    <div class="bri"><b>Новичок без опыта →</b> смена 1 + подсветить неделю 0 как точку входа</div>
+    <div class="bri"><b>Хочет зарабатывать на ИИ →</b> смена 1 + бонус-модуль «Профессия»</div>
+  </div>
+</div>
+</div>
+
+<div class="stage">
+<div class="sh" onclick="tog(this)">
+  <div class="sn n7">7</div><div class="si"><div class="st">Резюмирование</div><div class="ss">Показать, что услышали — создать доверие</div></div>
+  <i class="ti ti-chevron-down" style="font-size:15px;color:#aaa"></i>
+</div>
+<div class="sb">
+  <div class="ml">Шаблон</div>
+  <div class="msg">Давайте подрезюмирую, правильно ли Вас услышал(а) 🙂<br><br>
+Сейчас у Вас <b>[ситуация своими словами]</b>, зарабатываете <b>[доход]</b>, и главное, что хочется изменить — <b>[боль / проблема]</b>.<br><br>
+Хотите прийти к <b>[цель]</b>, и для Вас это важно, потому что <b>[то, что человек сказал в точке Б]</b>.<br><br>
+При этом пока не хватает <b>[что мешает]</b>.<br><br>
+Я правильно Вас понял(а)?</div>
+  <div class="tip" style="margin-bottom:0">Используйте слова самого клиента — не свои. Чем точнее отражение, тем сильнее доверие и желание купить.</div>
+</div>
+</div>
+
+<div class="stage">
+<div class="sh" onclick="tog(this)">
+ <div class="sn n8">8</div><div class="si"><div class="st">Переход к предложению</div><div class="ss">Презентация → тарифы → закрытие → оплата</div></div>
+  <i class="ti ti-chevron-down" style="font-size:15px;color:#aaa"></i>
+</div>
+<div class="sb">
+ 
+  <!-- шаг 8.1 переход -->
+  <div class="ml">8.1 — открывающая фраза</div>
+  <div class="msg">Отлично! Тогда могу сказать уверенно — лагерь Вам подойдёт. У Вас чёткие цели, и мы точно поможем их реализовать. Давайте расскажу о программе 🙂</div>
+ 
+  <!-- шаг 8.2 мини-презентация -->
+  <div class="ml" style="margin-top:10px">8.2 — мини-презентация лагеря (2–3 минуты)</div>
+  <div class="msg">Смотрите — лагерь «На волне ИИ» это 4-8 недель практики плюс неделя 0 для настройки до старта. Всё в небольших группах: до 30 человек на одного куратора, который работает лично с каждым.<br><br>
+Есть два направления — одно под Вас, два — ещё лучше:<br><br>
+<b>Смена 1 «Бренд и клиенты» — старт 11 июня.</b> Контент, продажи и маркетинг через ИИ. Выходите с готовой системой: карточки для маркетплейсов, рилсы без монтажёра, тексты в своём стиле, Telegram-бот для приёма заявок, автоответы в Instagram. Плюс бонус-модуль «Профессия» — если хотите ещё и зарабатывать на этих навыках: 10 готовых офферов, скрипты, методика портфолио за 7 дней.<br><br>
+<b>Смена 2 «Помощник и сервис» — старт 9 июля.</b> Создаёте своего ИИ-помощника под жизнь и бизнес — без программистов, обычными словами. Это может быть помощник для продаж, для здоровья, для финансов — что актуально именно Вам. По желанию — превращаете его в платный сервис.<br><br>
+Можно взять одну смену или сразу полный лагерь — тогда экономия 20 000 ₽ и обе смены идут одна за другой без лишних решений.</div>
+ 
+  <!-- шаг 8.3 время -->
+  <div class="ml" style="margin-top:10px">8.3 — уточнить по времени</div>
+  <div class="msg">По времени — полная программа идёт 2 месяца. В комфортном режиме нужно около 1–2 часов в день или 6–7 часов в неделю. Записи всех уроков хранятся, темп гибкий — можно догонять. Как у Вас с этим, сможете выделить?</div>
+  <div class="tip" style="margin-bottom:10px">Дождитесь ответа. Если «да» — идёте дальше. Если «мало времени» — объясните гибкий формат и записи.</div>
+ 
+  <!-- шаг 8.4 тарифы — визуально -->
+  <div class="ml" style="margin-top:10px">8.4 — презентация тарифов</div>
+  <div class="msg" style="margin-bottom:10px">По стоимости — тут Майя специально сделала так, чтобы было доступно. Есть три варианта захода, сейчас покажу 🙂</div>
+ 
+  <!-- тарифная сетка -->
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px">
+ 
+    <!-- тариф 1 -->
+    <div style="border:1px solid #e0ddd6;border-radius:12px;padding:1rem;background:#fff">
+      <div style="font-size:10px;letter-spacing:.05em;color:#aaa;margin-bottom:6px;text-transform:uppercase">Тариф 1</div>
+      <div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:4px">Самостоятельно</div>
+      <div style="font-size:11px;color:#888;margin-bottom:10px">одна смена на выбор</div>
+      <div style="font-size:18px;font-weight:500;color:#1a1a1a;margin-bottom:2px">от 23 990 ₽</div>
+      <div style="font-size:11px;color:#aaa;margin-bottom:10px">рассрочка от 2 519 ₽/мес</div>
+      <div style="font-size:11px;color:#555;line-height:1.6">✓ Видеоуроки (4 нед)<br>✓ Открывающий и закрывающий эфир с Майей<br>✓ Q&amp;A эфиры с Маргаритой<br>✓ Банк готовых решений (30+ шаблонов)<br>✓ Доступ 3 месяца<br><span style="color:#aaa">✗ Без куратора<br>✗ Без проверки ДЗ<br>✗ Без групповых встреч</span></div>
+      <div style="margin-top:10px;background:#FAEEDA;border-radius:6px;padding:5px 8px;font-size:11px;color:#633806">Предлагать только если клиент сам настаивает «куратор не нужен»</div>
+    </div>
+ 
+    <!-- тариф 2 — рекомендованный -->
+    <div style="border:2px solid #0C447C;border-radius:12px;padding:1rem;background:#fff;position:relative">
+      <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#0C447C;color:#fff;font-size:10px;padding:2px 10px;border-radius:10px;white-space:nowrap">рекомендуем</div>
+      <div style="font-size:10px;letter-spacing:.05em;color:#aaa;margin-bottom:6px;text-transform:uppercase">Тариф 2</div>
+      <div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:4px">С куратором</div>
+      <div style="font-size:11px;color:#888;margin-bottom:10px">одна смена на выбор</div>
+      <div style="font-size:18px;font-weight:500;color:#1a1a1a;margin-bottom:2px">от 29 990 ₽</div>
+      <div style="font-size:11px;color:#aaa;margin-bottom:10px">рассрочка от 3 149 ₽/мес</div>
+      <div style="font-size:11px;color:#555;line-height:1.6">✓ Всё из тарифа 1<br>✓ Куратор 1 на 30 человек<br>✓ Еженедельные групповые встречи<br>✓ Проверка домашних заданий<br>✓ Чат с куратором<br>✓ Промпты под Вашу нишу<br>✓ «Вопрос Майе» через куратора<br>✓ Доступ 6 месяцев</div>
+      <div style="margin-top:10px;background:#E1F5EE;border-radius:6px;padding:5px 8px;font-size:11px;color:#085041">Дефолтное предложение для большинства клиентов</div>
+    </div>
+ 
+    <!-- тариф 3 -->
+    <div style="border:1px solid #e0ddd6;border-radius:12px;padding:1rem;background:#fff">
+      <div style="font-size:10px;letter-spacing:.05em;color:#aaa;margin-bottom:6px;text-transform:uppercase">Тариф 3</div>
+      <div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:4px">Полный лагерь</div>
+      <div style="font-size:11px;color:#888;margin-bottom:10px">обе смены сразу</div>
+      <div style="font-size:18px;font-weight:500;color:#1a1a1a;margin-bottom:2px">от 49 490 ₽</div>
+      <div style="font-size:11px;color:#aaa;margin-bottom:10px">рассрочка от 5 249 ₽/мес</div>
+      <div style="font-size:11px;color:#555;line-height:1.6">✓ Всё из тарифа 2 × 2 смены<br>✓ Claude Max через сервер команды (~16 000 ₽/мес)<br>✓ VPN включён<br>✓ Библиотека шаблонов команды<br>✓ VIP-чат с Маргаритой<br>✓ Доступ 9 месяцев<br>✓ Экономия 20 000 ₽ vs два отдельных тарифа</div>
+      <div style="margin-top:10px;background:#E1F5EE;border-radius:6px;padding:5px 8px;font-size:11px;color:#085041">Апсейл — предлагать всем, кто берёт одну смену</div>
+    </div>
+  </div>
+ 
+  <!-- скрипт подачи тарифа -->
+  <div class="ml" style="margin-top:4px">8.5 — скрипт подачи тарифа</div>
+  <div class="msg">Исходя из того, что Вы рассказали — рекомендую тариф с куратором. Это не просто «чат поддержки»: куратор разбирает Вашу конкретную нишу, даёт промпты под Ваши задачи, проверяет домашние задания и еженедельно встречается с группой лично.<br><br>
+Стоимость — от 29 990 ₽. Есть рассрочка на 12 месяцев — выходит от 3 149 ₽ в месяц. Это меньше, чем один заказ у дизайнера.</div>
+ 
+  <!-- апсейл -->
+  <div class="ml" style="margin-top:10px">8.6 — апсейл в полный лагерь</div>
+  <div class="msg">И сразу один момент — многие берут сначала одну смену, потом докупают вторую отдельно. Но если взять полный лагерь сразу, то экономия составит 20 000 ₽, плюс ещё бонусом идут Claude Max и VIP-чат с Маргаритой. Одной смены для старта достаточно, но если понимаете, что хотите и то и другое — выгоднее сразу.</div>
+ 
+  <!-- ценовые окна -->
+  <div class="ml" style="margin-top:10px">8.7 — срочность: ценовые окна</div>
+  <div style="border:1px solid #e0ddd6;border-radius:10px;overflow:hidden;margin-bottom:10px;font-size:12px">
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid #e0ddd6;background:#E1F5EE">
+      <span style="background:#085041;color:#fff;border-radius:6px;padding:1px 7px;font-size:10px">сейчас</span>
+      <span style="font-weight:500;color:#085041">28 мая — закрытая презентация</span>
+      <span style="margin-left:auto;color:#085041;font-weight:500">лучшая цена + бонусы</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid #e0ddd6">
+      <span style="background:#E6F1FB;color:#0C447C;border-radius:6px;padding:1px 7px;font-size:10px">скоро</span>
+      <span style="color:#555">9 июня — открытая презентация</span>
+      <span style="margin-left:auto;color:#888">цена выше, бонусы до 8 июня</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid #e0ddd6">
+      <span style="background:#FAEEDA;color:#633806;border-radius:6px;padding:1px 7px;font-size:10px">+5К</span>
+      <span style="color:#555">11 июня — старт лагеря</span>
+      <span style="margin-left:auto;color:#888">бонусов нет</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 12px">
+      <span style="background:#FCEBEB;color:#791F1F;border-radius:6px;padding:1px 7px;font-size:10px">макс</span>
+      <span style="color:#555">после старта</span>
+      <span style="margin-left:auto;color:#888">полная цена</span>
+    </div>
+  </div>
+  <div class="msg">Сейчас самое выгодное окно — до 28 мая действует лучшая цена и бонус-модули, которые потом не выдаются. После 11 июня цена вырастет и бонусы закроются. Так что если решение созревает — сейчас оптимальный момент.</div>
+ 
+  <!-- бонусы -->
+  <div class="ml" style="margin-top:10px">8.8 — бонусы за быстрое решение (козыри)</div>
+  <div style="border:1px solid #e0ddd6;border-radius:10px;padding:10px 12px;font-size:12px;color:#555;margin-bottom:8px">
+    <div style="font-weight:500;color:#1a1a1a;margin-bottom:7px">При оплате сейчас — дополнительно:</div>
+    <div style="margin-bottom:4px">✓ Бонус-модуль <b>«Профессия»</b> — 10 офферов, договор, 20 скриптов продаж, методика портфолио за 7 дней</div>
+    <div style="margin-bottom:4px">✓ Бонус-модуль <b>«Монетизация сервиса»</b> (смена 2 или полный лагерь) — подключение касс, первые пользователи</div>
+    <div style="margin-bottom:4px">✓ <b>Месяц закрытого клуба</b> после лагеря</div>
+    <div style="margin-bottom:4px">✓ Промокод на <b>Syntx со скидкой 15%</b> + гайд по Perplexity Pro</div>
+    <div>✓ Доступ к <b>100+ чатам с вакансиями</b> для первых клиентов</div>
+  </div>
+  <div class="warn" style="margin-bottom:10px">Бонусы — инструмент дожима на усмотрение менеджера. Не обязательно называть все сразу. Оставляйте козыри.</div>
+ 
+  <!-- реакция на цену -->
+  <div class="ml" style="margin-top:4px">8.9 — работа с реакцией на цену</div>
+  <div class="br" style="margin-top:6px">
+    <div class="brt">«Дорого» →</div>
+    <div class="bri">«Есть рассрочка на 12 месяцев — выходит от 3 149 ₽/мес. Это как один небольшой заказ дизайнеру.»</div>
+    <div class="bri">Потом ROI: «Вы платите подрядчикам сколько? Тогда лагерь окупится за [N] недель.»</div>
+    <div class="bri">Только если настаивает — предложить тариф 1.</div>
+  </div>
+  <div class="br" style="margin-top:4px">
+    <div class="brt">«Подумаю» →</div>
+    <div class="bri">«Конечно, решение серьёзное. Что именно хочется обдумать — по программе или по стоимости? Давайте разберём вместе, чтобы не оставалось открытых вопросов.»</div>
+  </div>
+  <div class="br" style="margin-top:4px">
+    <div class="brt">«Посоветуюсь с мужем/партнёром» →</div>
+    <div class="bri">«Понимаю. Когда планируете пообщаться? Могу подготовить короткое резюме программы — чтобы Вам было проще объяснить.»</div>
+  </div>
+ 
+  <!-- закрытие -->
+  <div class="ml" style="margin-top:10px">8.10 — закрытие и оплата</div>
+  <div class="msg">Отлично, тогда оформляем прямо сейчас — скидываю ссылку на оплату, займёт буквально 2 минуты. Как удобнее: полная оплата или рассрочка?</div>
+  <div class="tip" style="margin-bottom:8px">Пауза. Молчите — дайте ответить первым. Тишина работает на Вас.</div>
+ 
+  <!-- варианты оплаты -->
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px;font-size:12px">
+    <div style="border:1px solid #e0ddd6;border-radius:10px;padding:10px;background:#fff;text-align:center">
+      <div style="font-weight:500;color:#1a1a1a;margin-bottom:4px">Полная оплата</div>
+      <div style="color:#888;font-size:11px">карта, СБП</div>
+    </div>
+    <div style="border:1px solid #e0ddd6;border-radius:10px;padding:10px;background:#fff;text-align:center">
+      <div style="font-weight:500;color:#1a1a1a;margin-bottom:4px">Рассрочка</div>
+      <div style="color:#888;font-size:11px">6 / 12 / 24 мес</div>
+    </div>
+    <div style="border:1px solid #e0ddd6;border-radius:10px;padding:10px;background:#fff;text-align:center">
+      <div style="font-weight:500;color:#1a1a1a;margin-bottom:4px">Предоплата</div>
+      <div style="color:#888;font-size:11px">часть сейчас, остаток позже</div>
+    </div>
+  </div>
+ 
+  <div class="warn" style="margin-bottom:0">При возражениях — не давить, не уговаривать. Задайте уточняющий вопрос, выслушайте и перейдите в раздел «Возражения».</div>
+</div>
+</div>
+ 
+<div class="sep"></div>
+<div class="row2">
+  <div class="card" style="margin-bottom:0"><div class="ctitle" style="color:#0F6E56">Делать</div><div class="cbody">Один вопрос за раз<br>Реагировать на ответ перед следующим вопросом<br>Использовать слова клиента в резюме<br>Спросить про прошлые курсы до презентации<br>Общение строго на «Вы»</div></div>
+  <div class="card" style="margin-bottom:0"><div class="ctitle" style="color:#A32D2D">Не делать</div><div class="cbody">Скидывать список вопросов сразу<br>Уходить в презентацию до этапа 8<br>Говорить «Я Вас вижу»<br>Обещать возврат средств<br>Говорить «выгоднее на 30%»<br>Упоминать Стэнфорд в РФ-текстах</div></div>
+</div>
+</div>
+ 
+<!-- ПРОДУКТ -->
+<div id="sec-product" class="sec">
+<div class="stitle">Разбор продукта</div>
+<div class="card">
+  <div class="ctitle">Главная идея — одним абзацем</div>
+  <div class="cbody">Лагерь «На волне ИИ» — это 8 недель практической работы с нейросетями в небольших группах, с куратором и обратной связью. Два направления: первая смена про маркетинг, контент и продажи, вторая — про создание собственного ИИ-помощника. На выходе у человека либо работает ИИ-система в бизнесе, либо есть профессия, которую рынок уже покупает — или и то и другое.</div>
+</div>
+<div class="row2" style="margin-bottom:10px">
+  <div class="met"><div class="mnum">8 нед</div><div class="mlbl">полный лагерь (2 смены)</div></div>
+  <div class="met"><div class="mnum">до 30</div><div class="mlbl">человек на одного куратора</div></div>
+  <div class="met"><div class="mnum">11 июня</div><div class="mlbl">старт смены 1</div></div>
+  <div class="met"><div class="mnum">9 июля</div><div class="mlbl">старт смены 2</div></div>
+</div>
+<div class="sep"></div>
+<div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:8px">Что даёт каждая смена</div>
+<div class="row2" style="margin-bottom:10px">
+  <div class="card" style="margin-bottom:0">
+    <div class="ctitle">Смена 1 — «Бренд и клиенты»</div>
+    <div class="cbody">Старт 11 июня. Маркетинг, контент и аккаунт бренда через ИИ.<br><br>Что получит участник: анализ конкурентов за 20 минут, контент-план на месяц, карточки для маркетплейсов, рилсы и сторис без монтажёра, тексты в своём голосе, сайты и презентации без верстальщика, Telegram-бот для заявок, автоответы в Instagram.<br><br>Плюс бонус-модуль «Профессия» — 10 готовых офферов от 5К до 100К, договор, скрипты продаж, методика портфолио за 7 дней.</div>
+  </div>
+  <div class="card" style="margin-bottom:0">
+    <div class="ctitle">Смена 2 — «Помощник и сервис»</div>
+    <div class="cbody">Старт 9 июля. Собственный ИИ-помощник под жизнь и бизнес — без программистов.<br><br>Что получит участник: помощника под свою задачу (бизнес, здоровье, финансы, семья — любое направление), автоматизацию рутинных процессов, готовую инфраструктуру для сборки без кода. По желанию — превратить помощника в платный сервис.<br><br>Плюс бонус-модуль «Монетизация сервиса» — подключение касс, маркетинг, первые пользователи.</div>
+  </div>
+</div>
+<div class="card">
+  <div class="ctitle">Трансформация: до и после</div>
+  <div class="cbody">
+    <div class="step"><div class="snum">→</div><div class="stxt"><b>Было:</b> платит дизайнеру, копирайтеру и монтажёру по 30–90К в месяц, контент делается медленно, директ отнимает часы, нет времени на главное.</div></div>
+    <div class="step"><div class="snum">→</div><div class="stxt"><b>Стало:</b> ИИ-система делает контент, отвечает на вопросы клиентов, собирает отчёты. Экономия 15–85К в месяц. Навык, который можно продавать другим.</div></div>
+  </div>
+</div>
+<div class="row3" style="margin-bottom:10px">
+  <div class="card" style="margin-bottom:0"><div class="ctitle" style="color:#0F6E56">Рациональная ценность</div><div class="cbody">Экономия на подрядчиках 15–85К/мес. Один клиент-фрилансер = лагерь окупился. Навык, который покупают прямо сейчас.</div></div>
+  <div class="card" style="margin-bottom:0"><div class="ctitle" style="color:#3C3489">Эмоциональная ценность</div><div class="cbody">Не остаться за бортом. Войти в осень с готовой системой. Ощущение «я тоже могу» — без кода и программистов.</div></div>
+  <div class="card" style="margin-bottom:0"><div class="ctitle" style="color:#712B13">Статусная ценность</div><div class="cbody">Быть на шаг впереди 90% рынка. Идти рядом с Майей — человеком, который замечает тренды первым.</div></div>
+</div>
+<div class="card">
+  <div class="ctitle">Почему это не «ещё один курс по ChatGPT»</div>
+  <div class="cbody">
+    <div class="step"><div class="snum">1</div><div class="stxt"><b>Практика на своём проекте.</b> Домашние задания сразу становятся реальным контентом или портфолио.</div></div>
+    <div class="step"><div class="snum">2</div><div class="stxt"><b>Без кода.</b> Бот, сайт, помощник — собираете обычными словами (vibe-coding).</div></div>
+    <div class="step"><div class="snum">3</div><div class="stxt"><b>До 30 человек на куратора.</b> Реальная обратная связь под Ваш проект.</div></div>
+    <div class="step"><div class="snum">4</div><div class="stxt"><b>Куратор разбирает Вашу нишу.</b> Конкретные промпты под Ваш бизнес, а не универсальные советы.</div></div>
+    <div class="step"><div class="snum">5</div><div class="stxt"><b>Работает из России без VPN.</b> Syntx + Perplexity по СБП. Неделя 0 убирает барьер до старта.</div></div>
+    <div class="step"><div class="snum">6</div><div class="stxt"><b>Эксперт с реальным бизнесом.</b> Майя — бизнес 160М ₽ в год, экономит 85К в месяц на ИИ.</div></div>
+  </div>
+</div>
+<div class="card">
+  <div class="ctitle">Ключевые кейсы для диалогов</div>
+  <div class="cbody">
+    <div style="margin-bottom:8px"><span class="tag t-teal">Майя</span> Было 90К на трёх подрядчиков → стало 5 500 ₽ на ИИ-подписку. <b style="color:#1a1a1a">Экономия 84 500 ₽/мес.</b></div>
+    <div style="margin-bottom:8px"><span class="tag t-blue">Кейс 1</span> Ученица улучшила фото карточек через один промпт → заказы <b style="color:#1a1a1a">выросли с 4 до 27 в день.</b></div>
+    <div style="margin-bottom:8px"><span class="tag t-purple">Кейс 2</span> Ученице 58 лет — разобралась со всем. Аргумент против «я не разберусь».</div>
+    <div><span class="tag t-amber">Рынок</span> 96% маркетологов планируют ИИ. Реально внедрили — <b style="color:#1a1a1a">только 6%.</b></div>
+  </div>
+</div>
+<div class="card">
+  <div class="ctitle">Формат и команда</div>
+  <div class="cbody">
+    <div class="step"><div class="snum">▸</div><div class="stxt">Видеоуроки в записи + открывающий и закрывающий эфиры с Майей — для всех тарифов</div></div>
+    <div class="step"><div class="snum">▸</div><div class="stxt">Q&A эфиры с Маргаритой Квартальновой (продюсер, экспертиза по ИИ) — для всех тарифов</div></div>
+    <div class="step"><div class="snum">▸</div><div class="stxt">Куратор 1 на 30 человек: встречи, чат, проверка ДЗ, помощь с инструментами — тарифы 2 и 3</div></div>
+    <div class="step"><div class="snum">▸</div><div class="stxt">Около 6–7 часов в неделю. Все записи хранятся, темп гибкий.</div></div>
+  </div>
+</div>
+<div class="card">
+  <div class="ctitle">Инструменты лагеря</div>
+  <div class="cbody">
+    <span class="tag t-blue">ChatGPT</span><span class="tag t-blue">Claude</span><span class="tag t-teal">Perplexity</span><span class="tag t-teal">Syntx</span><span class="tag t-purple">Nano Banana</span><span class="tag t-amber">HeyGen</span><span class="tag t-amber">ElevenLabs</span><span class="tag t-coral">Capcut AI</span><span class="tag t-coral">Adobe AI</span><br><br>
+    Для РФ: Syntx + Perplexity без VPN, оплата по СБП. Для тех за рубежом — оригинальные нейросети.
+  </div>
+</div>
+<div class="tip">Главный страх аудитории — не цена и не сложность, а повторный провал. В каждом диалоге сначала спрашивайте про опыт прошлых курсов, давайте кейс «такого же» человека и подсвечивайте неделю 0.</div>
+</div>
+
+<!-- СПОСОБЫ ЗАРАБОТКА -->
+<div id="sec-earnings" class="sec">
+ 
+<div class="stitle">Способы заработка</div>
+ 
+<div class="card">
+  <div class="ctitle">Общая логика</div>
+  <div class="cbody">После лагеря у человека два пути: <b style="color:#1a1a1a">сэкономить</b> — перестать платить подрядчикам и делать всё самому через ИИ, или <b style="color:#1a1a1a">заработать</b> — продавать этот навык другим. Большинство участников совмещают оба пути одновременно.</div>
+</div>
+ 
+<!-- путь 1 — экономия -->
+<div class="sep"></div>
+<div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:8px">Путь 1 — экономия внутри своего бизнеса</div>
+<div class="cbody" style="font-size:13px;color:#555;margin-bottom:10px">Самый быстрый результат. Человек перестаёт платить подрядчикам и делает всё сам через ИИ. Никаких клиентов, никаких продаж — просто замена расходов.</div>
+ 
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px">
+  <div class="met">
+    <div class="mnum" style="font-size:16px">84 500 ₽</div>
+    <div class="mlbl">экономия Майи в месяц<br>(было 90К → стало 5 500 ₽)</div>
+  </div>
+  <div class="met">
+    <div class="mnum" style="font-size:16px">16 000 ₽</div>
+    <div class="mlbl">стоила презентация на 82 слайда<br>(сейчас — бесплатно)</div>
+  </div>
+  <div class="met">
+    <div class="mnum" style="font-size:16px">17 000 ₽</div>
+    <div class="mlbl">экономия на тренере<br>и нутрициологе в месяц</div>
+  </div>
+</div>
+ 
+<div class="card">
+  <div class="ctitle">На чём конкретно экономят</div>
+  <div class="cbody">
+    <div class="step"><div class="snum">→</div><div class="stxt"><b>Дизайнер</b> — карточки товаров, баннеры, инфографика, обложки для сторис. Раньше: 3–5К за единицу. Сейчас: Nano Banana + промпт.</div></div>
+    <div class="step"><div class="snum">→</div><div class="stxt"><b>Копирайтер</b> — тексты для постов, рассылок, карточек маркетплейсов, рекламных заходов. Раньше: 5–10К за текст. Сейчас: Claude + промпт.</div></div>
+    <div class="step"><div class="snum">→</div><div class="stxt"><b>Монтажёр</b> — рилсы, сторис, подкасты. Раньше: 5–15К за ролик. Сейчас: Capcut AI + ElevenLabs.</div></div>
+    <div class="step"><div class="snum">→</div><div class="stxt"><b>Верстальщик / разработчик</b> — лендинги, простые сайты. Раньше: 15–50К. Сейчас: vibe-coding в Claude за вечер.</div></div>
+    <div class="step"><div class="snum">→</div><div class="stxt"><b>Маркетолог-аналитик</b> — анализ конкурентов, ЦА, стратегия. Раньше: 50–100К за проект. Сейчас: Perplexity Deep Research за 20 минут.</div></div>
+    <div class="step"><div class="snum">→</div><div class="stxt"><b>Ассистент</b> — директ, ответы на вопросы, квалификация заявок. Сейчас: Telegram-бот + автоприветствие в Instagram.</div></div>
+  </div>
+</div>
+ 
+<!-- путь 2 — фриланс -->
+<div class="sep"></div>
+<div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:8px">Путь 2 — фриланс: продавать навык другим</div>
+<div class="cbody" style="font-size:13px;color:#555;margin-bottom:10px">Берёте клиента — предпринимателя, эксперта, малый бизнес — и делаете для него то, что умеете после лагеря. Разовые проекты или ежемесячное ведение.</div>
+ 
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px">
+  <div class="card" style="margin-bottom:0">
+    <div class="ctitle">Разовые услуги</div>
+    <div class="cbody" style="font-size:12px;line-height:1.7">
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f0ede8"><span>Контент-пакет (5 постов + 3 рилса)</span><span style="color:#1a1a1a;font-weight:500">5–20К</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f0ede8"><span>Карточки маркетплейса (фото + текст)</span><span style="color:#1a1a1a;font-weight:500">3–10К/шт</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f0ede8"><span>Лендинг через vibe-coding</span><span style="color:#1a1a1a;font-weight:500">10–40К</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f0ede8"><span>Telegram-бот для заявок</span><span style="color:#1a1a1a;font-weight:500">15–50К</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f0ede8"><span>Настройка ИИ-помощника под бизнес</span><span style="color:#1a1a1a;font-weight:500">10–50К</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>Анализ ЦА и конкурентов</span><span style="color:#1a1a1a;font-weight:500">10–30К</span></div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:0">
+    <div class="ctitle">Ежемесячное ведение</div>
+    <div class="cbody" style="font-size:12px;line-height:1.7">
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f0ede8"><span>AI-контент менеджер (1 аккаунт)</span><span style="color:#1a1a1a;font-weight:500">30–80К/мес</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f0ede8"><span>AI-SMM под ключ</span><span style="color:#1a1a1a;font-weight:500">50–100К/мес</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f0ede8"><span>Ведение карточек маркетплейса</span><span style="color:#1a1a1a;font-weight:500">20–60К/мес</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #f0ede8"><span>AI-ассистент для эксперта</span><span style="color:#1a1a1a;font-weight:500">20–50К/мес</span></div>
+      <div style="display:flex;justify-content:space-between;padding:3px 0"><span>2–3 клиента одновременно</span><span style="color:#1a1a1a;font-weight:500">60–200К/мес</span></div>
+    </div>
+  </div>
+</div>
+ 
+<div class="tip" style="margin-bottom:10px">Реалистичный фриланс-доход на старте — 30–150К/мес при 2–3 клиентах. Первый клиент = лагерь окупился.</div>
+ 
+<div class="card">
+  <div class="ctitle">Мини-профессии, которые можно продавать сразу после лагеря</div>
+  <div class="cbody" style="font-size:12px;line-height:1.8">
+    <span class="tag t-blue">AI-контент менеджер</span>
+    <span class="tag t-blue">AI-SMM специалист</span>
+    <span class="tag t-teal">AI-дизайнер карточек</span>
+    <span class="tag t-teal">AI-копирайтер</span>
+    <span class="tag t-purple">AI-ассистент эксперта</span>
+    <span class="tag t-purple">AI-упаковщик личного бренда</span>
+    <span class="tag t-amber">AI-специалист по рилсам</span>
+    <span class="tag t-amber">AI-автоматизатор контента</span>
+    <span class="tag t-coral">AI-разработчик Telegram-ботов</span>
+    <span class="tag t-coral">AI-упаковщик маркетплейсов</span>
+  </div>
+</div>
+ 
+<!-- путь 3 — собственный сервис -->
+<div class="sep"></div>
+<div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:8px">Путь 3 — собственный ИИ-сервис (смена 2)</div>
+<div class="cbody" style="font-size:13px;color:#555;margin-bottom:10px">Создаёте продукт один раз — и продаёте его многократно по подписке или разово. Это уже не фриланс, а полноценный бизнес.</div>
+ 
+<div class="card">
+  <div class="ctitle">Примеры сервисов, которые собирают на лагере</div>
+  <div class="cbody">
+    <div class="step"><div class="snum">▸</div><div class="stxt"><b>ИИ-помощник для предпринимателя</b> — принимает заявки, квалифицирует, отвечает в директе в стиле владельца. Продаётся другим предпринимателям как готовое решение.</div></div>
+    <div class="step"><div class="snum">▸</div><div class="stxt"><b>ИИ-нутрициолог / тренер</b> — составляет план питания, меню из того что есть в холодильнике, программу тренировок. Подписка от 990 ₽/мес.</div></div>
+    <div class="step"><div class="snum">▸</div><div class="stxt"><b>ИИ-финансовый помощник</b> — анализирует расходы, считает юнит-экономику, напоминает про налоги. Для малого бизнеса и самозанятых.</div></div>
+    <div class="step"><div class="snum">▸</div><div class="stxt"><b>ИИ-консультант под нишу</b> — например, для beauty-мастеров: отвечает на вопросы клиентов, записывает, присылает напоминания. Продаётся другим мастерам в нише.</div></div>
+    <div class="step"><div class="snum">▸</div><div class="stxt"><b>ИИ-аналитик маркетплейса</b> — мониторит конкурентов, анализирует цены, предлагает правки карточек. Востребован у селлеров на WB/Ozon.</div></div>
+  </div>
+</div>
+ 
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px">
+  <div class="met"><div class="mnum" style="font-size:16px">990 ₽/мес</div><div class="mlbl">минимальная подписка на сервис</div></div>
+  <div class="met"><div class="mnum" style="font-size:16px">100 польз.</div><div class="mlbl">= 99 000 ₽/мес пассивно</div></div>
+  <div class="met"><div class="mnum" style="font-size:16px">без кода</div><div class="mlbl">сборка на vibe-coding в Claude</div></div>
+</div>
+ 
+<!-- путь 4 — новая профессия через работу -->
+<div class="sep"></div>
+<div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:8px">Путь 4 — новая профессия в найме или на удалёнке</div>
+<div class="card">
+  <div class="ctitle">Кому подходит</div>
+  <div class="cbody">Тем, кто сейчас в найме или декрете и хочет сменить направление — не уходя резко. После лагеря можно предложить текущему работодателю новую роль AI-специалиста или найти новое место с более высокой ставкой.</div>
+</div>
+<div class="card">
+  <div class="ctitle">Реальный рынок</div>
+  <div class="cbody">AI-контент менеджер в компании — 80–150К/мес. AI-маркетолог — 100–200К/мес. Автоматизатор процессов — 120–250К/мес. Спрос растёт: 96% маркетологов планируют ИИ, внедрили — только 6%. Специалистов не хватает.</div>
+</div>
+ 
+ 
+<div class="warn" style="margin-bottom:0">Все цифры — ориентиры, не гарантии. Конкретный результат зависит от усилий и ниши. Формулировка в диалоге: «реалистичный ориентир» или «при таком-то сценарии».</div>
+</div>
+
+<!-- АУДИТОРИЯ -->
+<div id="sec-audience" class="sec">
+<div class="stitle">Сегменты аудитории</div>
+<div class="fbr">
+  <span class="stab on" onclick="showSeg('maria',this)">Мария — маркетплейсы</span>
+  <span class="stab" onclick="showSeg('elena',this)">Елена — найм / декрет</span>
+  <span class="stab" onclick="showSeg('anna',this)">Анна — свой бизнес</span>
+  <span class="stab" onclick="showSeg('darina',this)">Дарина — экспат</span>
+  <span class="stab" onclick="showSeg('newbie',this)">Новичок / боится ИИ</span>
+  <span class="stab" onclick="showSeg('advanced',this)">Уже пользуется ИИ</span>
+</div>
+
+<div id="seg-maria" class="sc on">
+  <div class="tag t-teal" style="margin-bottom:8px">50–55% аудитории · самый горячий сегмент</div>
+  <div class="card"><div class="ctitle">Кто это</div><div class="cbody">Продаёт на Wildberries или Ozon, выручка 300К–3М в месяц. Уперлась в потолок: конкуренция растёт, маржа падает. Платит дизайнеру, копирайтеру, монтажёру — в сумме 30–90К в месяц.</div></div>
+  <div class="row2"><div class="card" style="margin-bottom:0"><div class="ctitle">Боли</div><div class="cbody">Дорогие подрядчики · Медленный контент · Конкуренты быстрее · Нет времени на стратегию</div></div><div class="card" style="margin-bottom:0"><div class="ctitle">Что хочет</div><div class="cbody">Снизить расходы · Карточки быстрее · Автоматизировать директ · Опередить конкурентов</div></div></div>
+  <div class="card" style="margin-top:10px"><div class="ctitle">Как продавать</div><div class="cbody">Говорить про экономию в рублях. Считать ROI под её расходы. Не «научитесь ИИ» — а «сократите расходы с X тысяч до 5 500 ₽».</div></div>
+  <div class="msg" style="margin-top:8px;font-style:italic">«Вы платите дизайнеру сколько в месяц? 20К? Тогда лагерь окупится уже в первые две недели работы. После него делаете карточки сами — за вечер, по готовым шаблонам.»</div>
+</div>
+
+<div id="seg-elena" class="sc">
+  <div class="tag t-blue" style="margin-bottom:8px">30–35% аудитории</div>
+  <div class="card"><div class="ctitle">Кто это</div><div class="cbody">В найме или декрете. Подписана на Майю 1–2 года. Ждёт «подходящий момент». Решение принимает сама или с мужем — 2–3 касания.</div></div>
+  <div class="row2"><div class="card" style="margin-bottom:0"><div class="ctitle">Боли</div><div class="cbody">Нет своей профессии · Зависимость от работодателя · Страх не дойти · Нет денег на старт</div></div><div class="card" style="margin-bottom:0"><div class="ctitle">Что хочет</div><div class="cbody">Доход из дома · Независимость · Уверенность · Пример «у меня тоже получится»</div></div></div>
+  <div class="card" style="margin-top:10px"><div class="ctitle">Как продавать</div><div class="cbody">Рассрочка — первый аргумент. Кейс «Майя — из декрета → 160М». Кейс «ученице 58 лет — всё получилось». Не давить. Дать время.</div></div>
+  <div class="msg" style="margin-top:8px;font-style:italic">«Майя сама начала из декрета — первая поставка на Wildberries, потом поехала в Китай с трёхмесячным ребёнком. Сейчас это 160М в год. В рассрочку — от 2 300 ₽ в месяц.»</div>
+</div>
+
+<div id="seg-anna" class="sc">
+  <div class="tag t-purple" style="margin-bottom:8px">10–15% · высокий чек · быстрое решение</div>
+  <div class="card"><div class="ctitle">Кто это</div><div class="cbody">Услуги, beauty, e-commerce, студия. Операционка съедает время. Нужна автоматизация. Решает быстро, без рассрочки.</div></div>
+  <div class="card"><div class="ctitle">Как продавать</div><div class="cbody">Связать ИИ с её конкретной нишей. Спросить: «Что сейчас отнимает больше всего времени?» Сразу предлагать полный лагерь.</div></div>
+  <div class="msg" style="margin-top:8px;font-style:italic">«В смене 2 Вы собираете своего ИИ-помощника под бизнес — он принимает заявки, отвечает в Вашем голосе 24/7. Сколько сейчас уходит на переписки и директ?»</div>
+</div>
+
+<div id="seg-darina" class="sc">
+  <div class="tag t-coral" style="margin-bottom:8px">Растущий сегмент · оплата в долларах</div>
+  <div class="card"><div class="ctitle">Кто это</div><div class="cbody">Русскоязычные экспатки в США и Европе. TikTok Shop, Shopify. Готова платить в долларах ($290–$1212). Майя тоже живёт в Майами — сильный аргумент доверия.</div></div>
+  <div class="card"><div class="ctitle">Как продавать</div><div class="cbody">«Майя переехала, живёт в Майами, продаёт на TikTok Shop USA — программа работает на оба рынка. Для тех, кто за рубежом, — оригинальные нейросети без ограничений.»</div></div>
+</div>
+
+<div id="seg-newbie" class="sc">
+  <div class="tag t-amber" style="margin-bottom:8px">Самый частый страх в переписке</div>
+  <div class="card"><div class="ctitle">Что говорит</div><div class="cbody">«Это сложно» · «Я гуманитарий» · «Только для технарей» · «Нужно программирование» · «Уже отстала»</div></div>
+  <div class="card"><div class="ctitle">Как отвечать</div><div class="cbody">Неделя 0 убирает технический барьер до старта. Ученице 58 лет — разобралась со всем. Пишете обычными словами — ИИ собирает. Программирования ноль.</div></div>
+  <div class="msg" style="margin-top:8px;font-style:italic">«На неделе 0 Вы устанавливаете всё пошагово, куратор рядом. К старту лагеря всё уже настроено. Программировать не нужно — пишете задачу обычными словами, ИИ делает остальное.»</div>
+</div>
+
+<div id="seg-advanced" class="sc">
+  <div class="card"><div class="ctitle">Что говорит</div><div class="cbody">«Уже пользуюсь ChatGPT» · «Проходил(а) курсы по нейросетям» · «Зачем мне это?»</div></div>
+  <div class="card"><div class="ctitle">Как отвечать</div><div class="cbody">Лагерь — не «научиться ИИ», а встроить систему в бизнес и монетизировать навык. Vibe-coding и сборка сервиса — это другой уровень после базовых промптов.</div></div>
+  <div class="msg" style="margin-top:8px;font-style:italic">«Если уже работаете с ChatGPT — отлично, базу пройдёте быстро. Смена 2 — это уже другое: сборка собственного ИИ-сервиса без программистов. Не про промпты, а про продукт.»</div>
+</div>
+</div>
+
+<!-- ВОЗРАЖЕНИЯ -->
+<div id="sec-obj" class="sec">
+<div class="stitle">База возражений</div>
+<div class="tip">Нажмите на возражение, чтобы раскрыть разбор.</div>
+<div class="fbr" id="obj-filter">
+  <button class="fbtn on" onclick="filterObj('all',this)">Все</button>
+  <button class="fbtn" onclick="filterObj('money',this)">Деньги</button>
+  <button class="fbtn" onclick="filterObj('time',this)">Время</button>
+  <button class="fbtn" onclick="filterObj('fear',this)">Страх / «не разберусь»</button>
+  <button class="fbtn" onclick="filterObj('trust',this)">Недоверие / прошлый опыт</button>
+  <button class="fbtn" onclick="filterObj('context',this)">«Не для меня»</button>
+</div>
+<div id="obj-list"></div>
+</div>
+
+<!-- FAQ -->
+<div id="sec-faq" class="sec">
+<div class="stitle">Вопросы и ответы</div>
+<div class="fbr" id="faq-filter">
+  <button class="fbtn on" onclick="filterFAQ('all',this)">Все</button>
+  <button class="fbtn" onclick="filterFAQ('product',this)">Продукт</button>
+  <button class="fbtn" onclick="filterFAQ('price',this)">Цены и тарифы</button>
+  <button class="fbtn" onclick="filterFAQ('tech',this)">Технические</button>
+  <button class="fbtn" onclick="filterFAQ('result',this)">Результаты</button>
+  <button class="fbtn" onclick="filterFAQ('tricky',this)">Неудобные</button>
+</div>
+<div id="faq-list"></div>
+</div>
+
+</div>
+
+<script>
+const OBJ=[
+  {c:'money',q:'«Дорого» или «нет денег»',why:'Сравнивает цену продукта с его ценностью — и пока не видит связи. Или реально ограниченный бюджет.',means:'Хочет купить, но ищет логическое обоснование или выход.',bad:'«Ну мы же вкладываем в качество...»',good:'«Скажите, дорого — это значит нет такой суммы сейчас, или не видите как это окупится?»',call:'«Скажите, сколько сейчас уходит на подрядчиков? Посчитаем окупаемость вместе.»'},
+  {c:'money',q:'«Уже тратила деньги на курс — больше не хочу»',why:'Страх повторного провала + реальное финансовое ограничение.',means:'Не уверена, что снова не потеряет деньги и время.',bad:'«Ну это совсем другой курс!»',good:'Сначала спросить: «Расскажите, что не зашло в прошлый раз?» Выслушать. Потом: неделя 0 убирает барьеры до старта, куратор 1 на 30 человек ведёт лично весь поток.',dm:'«Что именно не пошло в прошлый раз? Хочу убедиться, что Вы не окажетесь в той же ситуации.»',call:'«Это важно — расскажите, где был затык? Покажу, как мы это решаем.»'},
+  {c:'money',q:'«Непонятно, как на этом заработать» или «не окуплю»',why:'Нет понимания конкретного пути к деньгам.',means:'Хочет уверенности в возврате вложений.',bad:'«Многие зарабатывают по 150К!»',good:'Конкретные цифры: дизайнер берёт 5К за инфографику — после лагеря делаете это сами. Один клиент-фрилансер = лагерь окупился. Внутри бизнеса — экономия 15–85К в месяц.',dm:'«Давайте посчитаем под Вашу ситуацию — что сейчас платите подрядчикам?»',call:'«Расскажите о своём бизнесе — посчитаем ROI за пару минут.»'},
+  {c:'time',q:'«Нет времени» или «лето — занятое»',why:'Боится не дойти, не успеть, бросить на полпути.',means:'Не «нет времени», а «боюсь потратить деньги и не дойти».',bad:'«Ну это же всего 6–7 часов в неделю!»',good:'Всё в записях, можно идти в своём темпе и догонять любую неделю. Куратор не отключается, если пропустили — разбираемся вместе. 30 минут видео в день.',dm:'«Все записи хранятся в личном кабинете — можно идти в удобном темпе. Куратор не бросает, если что-то пропустили.»',call:'«Сколько реально могли бы выделять в неделю? Посмотрим, как вписать.»'},
+  {c:'fear',q:'«Я не технарь» или «боюсь не разобраться»',why:'Страх потерять деньги, если не получится освоить.',means:'Нужен пример «такого же» человека, у которого вышло.',bad:'«Да это вообще несложно!»',good:'Ученице 58 лет — разобралась со всем. Программировать не нужно — пишете задачу словами, ИИ собирает. Неделя 0 настраивает всё до старта.',dm:'«Программирования ноль — пишете задачу обычными словами, ИИ делает остальное. На неделе 0 куратор помогает с каждым шагом.»',call:'«Что именно кажется сложным? Давайте разберём конкретно.»'},
+  {c:'fear',q:'«ИИ — это хайп, скоро всё затихнет»',why:'Скептицизм. Защита от ощущения «меня разводят».',means:'Хочет убедиться, что вкладывает в реальное, а не в моду.',bad:'«Нет, ИИ — это навсегда!»',good:'Рынок ИИ в РФ вырос в 5 раз за 2025 год: с 13 до 58 млрд ₽. Amazon сократил 16 000 сотрудников из-за ИИ. Это уже инфраструктура, как интернет в начале 2000-х.',dm:'«Понимаю скепсис. Вот цифры рынка за прошлый год — что именно вызывает сомнение?»',call:'«Давайте покажу конкретные цифры — и Вы решите сами.»'},
+  {c:'trust',q:'«Уже проходила курсы — не зашло»',why:'Страх повторного провала — по кастдевам это главный барьер.',means:'Не курс плохой — боится снова не дойти.',bad:'«Ну этот лагерь совсем другой!»',good:'Сначала: «Расскажите, что именно не пошло?» Выслушать. Потом объяснить: неделя 0 убирает технический блок до старта, куратор на 30 человек — личный разбор под нишу, домашние задания на собственном проекте.',dm:'«Расскажите, что случилось в прошлый раз? Хочу убедиться, что история не повторится.»',call:'«Это самый важный вопрос перед покупкой. Где именно был затык?»'},
+  {c:'trust',q:'«Не знаю Майю» или «не доверяю»',why:'Холодный лид без контакта с брендом.',means:'Нужны доказательства: кто она, почему ей верить.',bad:'«Ну у неё 337К подписчиков!»',good:'Майя — предприниматель с бизнесом 160М ₽ в год на маркетплейсах. Не «блогер про ChatGPT» — человек, который встроил ИИ в свою компанию и экономит 85К в месяц.',dm:'«Могу поделиться её кейсами и парой уроков — чтобы Вы сами почувствовали формат?»',call:'«Что для Вас важно в эксперте? Покажу конкретные результаты.»'},
+  {c:'context',q:'«Это не для меня — я не на маркетплейсах»',why:'Видит только МП-позиционирование. Критично: 8 из 13 кастдевов сказали именно это.',means:'Не видит себя в продукте.',bad:'«Ну там есть и другие темы»',good:'Только один из четырёх модулей смены 1 про маркетплейсы. Остальные — для любого бизнеса. Смена 2 вообще не связана с МП — это ИИ-помощник под любую нишу.',dm:'«МП — только один модуль из четырёх. Чем Вы занимаетесь? Покажу конкретно, что из программы под Вас.»',call:'«Расскажите о своём деле — покажу конкретно, какие блоки программы для Вас.»'},
+  {c:'context',q:'«Нет бизнеса» или «не знаю куда применить»',why:'Не видит конкретной точки входа для своей ситуации.',means:'Нужен понятный первый шаг.',bad:'«Ну можно применить к чему угодно!»',good:'Бонус-модуль «Профессия» в смене 1 — 10 готовых офферов от 5К до 100К, скрипты продаж, методика первого портфолио за 7 дней. В лагере дают тестовые проекты от реальных брендов.',dm:'«Если своего проекта нет — в лагере дают тестовые от реальных брендов. Первое портфолио собираете прямо внутри.»',call:'«Что сейчас делаете или хотели бы делать? Покажу, как это монетизируется через лагерь.»'},
+  {c:'context',q:'«Не работает из России» или «нужен VPN»',why:'Технический страх: потрачу деньги — не смогу пользоваться.',means:'Нужна конкретная техническая уверенность.',bad:'«Ну VPN легко настроить»',good:'Работает без VPN. Syntx и Perplexity — оплата по СБП. Для тех, кто за рубежом, — оригинальные нейросети без ограничений. Оба варианта разобраны на неделе 0.',dm:'«Без VPN: Syntx + Perplexity по СБП — основной стек для РФ. Работает.»',call:'«Покажу конкретно, какие инструменты работают без VPN и как подключить.»'}
+];
+
+const FAQ=[
+  {c:'product',q:'В чём разница между сменой 1 и сменой 2?',a:'Смена 1 «Бренд и клиенты» — усиливаете маркетинг, контент и продажи через ИИ, либо получаете профессию AI-специалиста. Смена 2 «Помощник и сервис» — создаёте собственного ИИ-помощника под жизнь и бизнес, по желанию превращаете в платный сервис. Можно взять одну или обе — с разницей 20 000 ₽ в Вашу пользу.'},
+  {c:'product',q:'Кто такая Маргарита Квартальнова?',a:'Продюсер программы. Ведёт Q&A эфиры, контролирует качество обучения, управляет кураторами. Основная техническая экспертиза по ИИ — на ней. Майя — личный бренд, открывает и закрывает смены.'},
+  {c:'product',q:'Нужно ли знать программирование?',a:'Нет. Всё на vibe-coding: описываете задачу обычными словами — ИИ собирает сайт, бот, помощника. Ни строчки кода.'},
+  {c:'product',q:'Что такое неделя 0?',a:'Подготовительная неделя до официального старта. Участник устанавливает все инструменты, настраивает ИИ под себя, убирает технический барьер. К старту всё уже работает.'},
+  {c:'product',q:'Сколько времени нужно уделять лагерю?',a:'Около 6–7 часов в неделю: эфир — 1,5 ч, встреча с куратором — до 2 ч (тарифы 2 и 3), видеоуроки — примерно 30 минут в день, домашнее задание. Все записи хранятся, темп гибкий.'},
+  {c:'price',q:'Почему нет гарантии возврата денег?',a:'Это цифровой продукт с доступом к материалам и инструментам. После открытия доступа возврат технически невозможен. Вместо этого: ИИ-коуч в чате на 14 дней, куратор еженедельно, записи хранятся на 3, 6 или 9 месяцев в зависимости от тарифа.'},
+  {c:'price',q:'Какой тариф лучше?',a:'Дефолт — тариф 2 с куратором. Тариф 1 без обратной связи — только если клиент сам говорит «куратор мне не нужен». Лучший вариант — полный лагерь (тариф 3): экономия 20 000 ₽ и не нужно принимать второе решение о покупке.'},
+  {c:'price',q:'Когда повышается цена?',a:'Четыре окна: 28 мая — лучшая цена и бонусы; 9 июня — цена выше, бонусы ещё до 8 июня; 11 июня — ещё +5К, бонусов нет; после старта — полная цена.'},
+  {c:'tech',q:'Будут ли дополнительные расходы на инструменты?',a:'Минимум — около 3 000 ₽ в месяц (подписка на Claude или ChatGPT плюс свой сервер). Комфортный вариант — около 10 500 ₽ (Claude Max $100 + сервер + VPN). В тарифе 3 включён Claude Max через сервер команды — доплачиваете только за свой сервер от 1 000 до 2 500 ₽ в месяц.'},
+  {c:'tech',q:'Зачем нужен свой сервер?',a:'Чтобы данные участника и его клиентов хранились только у него. Вопрос безопасности и соблюдения закона о персональных данных. В лагере покажут, как выбрать, настроить и подключить.'},
+  {c:'tech',q:'Работает ли лагерь из России без VPN?',a:'Да. Syntx, Perplexity, DeepSeek — без VPN, оплата по СБП. Для тех, кто за рубежом, — оригинальные нейросети. Оба трека работают параллельно.'},
+  {c:'result',q:'Сколько реально можно заработать?',a:'Ориентиры: внутри своего бизнеса — экономия 15–85К в месяц на подрядчиках. Фриланс — 30–150К в месяц при двух-трёх клиентах. Один клиент — лагерь окупился. Все цифры — ориентиры, не гарантии.'},
+  {c:'result',q:'Будут ли реальные проекты для практики?',a:'Да. Каждую неделю — домашнее задание на собственном проекте. Дополнительно — тестовые задания от реальных брендов. Если бренду понравится результат — возможность работать напрямую. Проверка с обратной связью — тарифы 2 и 3.'},
+  {c:'tricky',q:'Почему именно лето?',a:'Летом другой темп и психологический настрой — хочется расти и меняться. К осени, когда деловая активность на пике, участник уже с готовой системой, а не только начинает разбираться.'},
+  {c:'tricky',q:'Чем лагерь отличается от YouTube?',a:'YouTube — контент без структуры, без обратной связи и без практики под конкретный проект. Лагерь — последовательная программа, куратор на небольшую группу, домашние задания с проверкой. На выходе рабочая система, а не список просмотренных видео.'},
+  {c:'tricky',q:'Где кейсы выпускников лагеря?',a:'Лагерь запускается впервые 11 июня. До этого — личный кейс Майи (160М ₽ в год, экономия 85К в месяц), кейс ученицы (заказы с 4 до 27 в день через один промпт) и ученица 58 лет.'},
+  {c:'tricky',q:'Чем Майя лучше других ИИ-экспертов?',a:'Instagram-блогер с реальным бизнесом на маркетплейсах (160М ₽ в год) и опытом встраивания ИИ в собственную компанию. Не теоретик — практик. 337К живых подписчиков, 3,9М просмотров в месяц.'}
+];
+
+function renderObj(cat){
+  const el=document.getElementById('obj-list');
+  const d=cat==='all'?OBJ:OBJ.filter(o=>o.c===cat);
+  el.innerHTML=d.map(o=>`<div class="oi" onclick="this.querySelector('.od').classList.toggle('on')">
+    <div class="oq">${o.q}</div>
+    <div class="od">
+      <div class="orl">Почему так говорит</div><div class="ort">${o.why}</div>
+      <div class="orl">Что на самом деле имеет в виду</div><div class="ort">${o.means}</div>
+      <div class="orl">Слабый ответ</div><div class="ort bad">${o.bad}</div>
+      <div class="orl">Сильный ответ</div><div class="ort good">${o.good}</div>
+      <div class="orl">На созвоне</div><div class="ort" style="margin-bottom:0">${o.call}</div>
+    </div>
+  </div>`).join('');
+}
+function filterObj(cat,btn){
+  document.querySelectorAll('#obj-filter .fbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');renderObj(cat);
+}
+function renderFAQ(cat){
+  const el=document.getElementById('faq-list');
+  const d=cat==='all'?FAQ:FAQ.filter(o=>o.c===cat);
+  el.innerHTML=d.map(o=>`<div class="qi" onclick="this.querySelector('.qa').classList.toggle('on')">
+    <div class="qq">${o.q}</div>
+    <div class="qa">${o.a}</div>
+  </div>`).join('');
+}
+function filterFAQ(cat,btn){
+  document.querySelectorAll('#faq-filter .fbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');renderFAQ(cat);
+}
+function showSec(id,btn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.getElementById('sec-'+id).classList.add('on');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+function showSeg(id,el){
+  document.querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));
+  document.getElementById('seg-'+id).classList.add('on');
+  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+}
+function tog(header){
+  const b=header.nextElementSibling;
+  b.classList.toggle('on');
+  const ic=header.querySelector('.ti-chevron-down');
+  if(ic)ic.style.transform=b.classList.contains('on')?'rotate(180deg)':'';
+}
+renderObj('all');
+renderFAQ('all');
+</script>
+</body>
+</html>
